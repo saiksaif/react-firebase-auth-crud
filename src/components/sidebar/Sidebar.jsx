@@ -28,15 +28,15 @@ const Sidebar = () => {
           <span className="logo">FoodFrenzy</span>
         </Link>
       </div>
-      <hr />
-      <div className="center">
+      {/* <hr /> */}
+      {/* <div className="center">
         <ul>
           <li onClick={handleSignOut}>
             <ExitToAppIcon className="icon" />
             <span>Logout</span>
           </li>
         </ul>
-      </div>
+      </div> */}
     </div>
   );
 };

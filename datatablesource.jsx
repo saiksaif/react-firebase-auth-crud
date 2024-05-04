@@ -18,13 +18,18 @@ export const prodColumns = [
       width: 100,
     },
     {
+      field: "productType",
+      headerName: "Product Type",
+      width: 120,
+    },
+    {
       field: "status",
       headerName: "Status",
       width: 120,
       renderCell: (params) => {
         return (
           <div className={`cellWithStatus ${params.row.status}`}>
-            {params.row.status ? "Available" : "Unavailable"}
+            {params.row.status}
           </div>
         );
       },

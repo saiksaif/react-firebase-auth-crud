@@ -56,20 +56,14 @@ export const userInputs = [
     //   placeholder: "Computers",
     // },
     {
-      id: "status",
-      label: "Status",
-      type: "checkbox",
-      placeholder: "Status",
-    },
-    {
       id: "price",
-      label: "Price",
+      label: "Price (Rs)",
       type: "number",
       placeholder: "100",
     },
     {
       id: "discount",
-      label: "Discount",
+      label: "Discount (%)",
       type: "number",
       placeholder: "10",
     },
@@ -81,7 +75,7 @@ export const userInputs = [
     },
     {
       id: "time",
-      label: "Time",
+      label: "Time (Mins)",
       type: "number",
       placeholder: "45",
     }

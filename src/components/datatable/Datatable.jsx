@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import {
   collection,
-  getDocs,
+  getDoc,
+  updateDoc,
   deleteDoc,
   doc,
   onSnapshot,
@@ -52,6 +53,20 @@ const Datatable = () => {
     };
   }, []);
 
+  const handleEdit = async (id) => {
+    try {
+      const productRef = doc(db, "Products", id);
+      const productDoc = await getDoc(productRef);
+      const newStatus = productDoc.data().status === "Available" ? "Unavailable" : "Available";
+      await updateDoc(productRef, { status: newStatus });
+      setData(
+        data.map((item) => (item.id === id ? { ...item, status: newStatus } : item))
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const handleDelete = async (id) => {
     try {
       await deleteDoc(doc(db, "Products", id));
@@ -65,10 +80,17 @@ const Datatable = () => {
     {
       field: "action",
       headerName: "Action",
-      width: 70,
+      width: 150,
       renderCell: (params) => {
+        // let status = params.row.status == "Available" ? "on" : "off"
         return (
           <div className="cellAction">
+            <div
+              className="editButton"
+              onClick={() => handleEdit(params.row.id)}
+            >
+              Toggle
+            </div>
             <div
               className="deleteButton"
               onClick={() => handleDelete(params.row.id)}
@@ -88,13 +110,15 @@ const Datatable = () => {
           Add New
         </Link>
       </div>
-      <DataGrid
-        className="datagrid"
-        rows={data}
-        columns={prodColumns.concat(actionColumn)}
-        pageSize={9}
-        rowsPerPageOptions={[9]}
-      />
+      <div style={{overflowX: "auto"}}>
+        <DataGrid
+          className="datagrid"
+          rows={data}
+          columns={prodColumns.concat(actionColumn)}
+          pageSize={9}
+          rowsPerPageOptions={[9]}
+        />
+      </div>
     </div>
   );
 };
