@@ -23,6 +23,18 @@ export const prodColumns = [
       width: 120,
     },
     {
+      field: "imageUrl",
+      headerName: "Image",
+      width: 80,
+      renderCell: (params) => {
+        return (
+          <div className={`cellWithStatus ${params.row.status}`}>
+            {params.row.imageUrl ? "Yes" : "No"}
+          </div>
+        );
+      },
+    },
+    {
       field: "status",
       headerName: "Status",
       width: 120,
